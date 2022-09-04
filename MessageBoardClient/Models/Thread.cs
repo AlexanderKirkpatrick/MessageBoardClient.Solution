@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
+
 namespace MessageBoardClient.Models
 {
   public class Thread
@@ -12,7 +14,7 @@ namespace MessageBoardClient.Models
     public int ParentBoardId { get; set; }
     public Board ParentBoard { get; set; }
     public int UserId { get; set; }
-    public User User { get; set; }
+    public User Users { get; set; }
     public ICollection<Post> Posts { get; set; }
 
     public Thread()
@@ -60,10 +62,10 @@ namespace MessageBoardClient.Models
       return threadPostList;
     }
 
-    public static void PostPost(Post post)
+    public static void NewThread(Thread thread)
     {
-      string requestAddress = $"Threads/{post.ParentThreadId}/posts";
-      string jsonPost = JsonConvert.SerializeObject(post);
+      string requestAddress = $"Threads/{thread.ParentBoardId}/posts";
+      string jsonPost = JsonConvert.SerializeObject(thread);
       var apiCallTask = ApiHelper.Post(requestAddress, jsonPost);
     }
   }

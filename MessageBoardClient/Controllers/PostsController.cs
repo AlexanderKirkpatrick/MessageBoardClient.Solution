@@ -12,7 +12,7 @@ namespace MessageBoardClient.Controllers
   {
     public IActionResult Index()
     {
-      List<Post> allPosts = Post.GetAll();
+      List<Post> allPosts = Post.GetPosts();
       return View(allPosts);
     }
 
@@ -32,7 +32,7 @@ namespace MessageBoardClient.Controllers
     public IActionResult Create(Post post, int threadId)
     { 
       post.ParentThreadId = threadId;
-      Post.NewPost(post, threadId);
+      Post.NewPost(post);
       return RedirectToAction("Details", "Threads", new { id = post.ParentThreadId });
     }
 
@@ -45,7 +45,7 @@ namespace MessageBoardClient.Controllers
     [HttpPost]
     public IActionResult Update(Post post)
     {
-      Post.Put(post);
+      Post.NewPost(post);
       return RedirectToAction("Details", "Threads", new { id = post.ParentThreadId });
     }
 

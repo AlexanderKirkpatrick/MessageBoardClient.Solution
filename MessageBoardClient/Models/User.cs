@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace MessageBoardClient.Models
 {
@@ -18,7 +19,7 @@ namespace MessageBoardClient.Models
       this.UserPosts = new HashSet<Post>();
       this.UserThreads = new HashSet<Thread>();
     }
-    
+
     public static List<User> GetUsers()
     {
       string requestAddress = "Users";

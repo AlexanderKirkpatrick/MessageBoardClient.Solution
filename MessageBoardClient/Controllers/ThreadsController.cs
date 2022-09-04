@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+
 namespace MessageBoardClient.Controllers
 {
   public class ThreadsController : Controller
   {
     public IActionResult Index()
     {
-      List<Thread> allThreads = Thread.GetAll();
+      List<Thread> allThreads = Thread.GetThreads();
       return View(allThreads);
     }
 
@@ -34,22 +35,22 @@ namespace MessageBoardClient.Controllers
       thread.ParentBoardId = boardId;
       thread.CreationDate = DateTime.Now;
       thread.UserId = 1;
-      Thread.Post(thread, boardId);
+      Thread.NewThread(thread);
       return RedirectToAction("Details", "Boards", new { id = thread.ParentBoardId });
     }
 
-    public IActionResult Update(int id)
-    {
-      Thread thisThread = Thread.GetDetails(id);
-      return View(thisThread);
-    }
+    // public IActionResult Update(int id)
+    // {
+    //   Thread thisThread = Thread.GetDetails(id);
+    //   return View(thisThread);
+    // }
 
-    [HttpPost]
-    public IActionResult Update(Thread thread)
-    {
-      Thread.Put(thread);
-      return RedirectToAction("Details", new { id = thread.ThreadId });
-    }
+    // [HttpPost]
+    // public IActionResult Update(Thread thread)
+    // {
+    //   Thread.NewPost(thread);
+    //   return RedirectToAction("Details", new { id = thread.ThreadId });
+    // }
 
     public IActionResult Delete(int id)
     {

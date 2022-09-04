@@ -5,6 +5,7 @@ using MessageBoardClient.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace MessageBoardClient.Controllers
 {
@@ -12,7 +13,7 @@ namespace MessageBoardClient.Controllers
   {
     public IActionResult Index()
     {
-      List<Board> allBoards = Board.GetAll();
+      List<Board> allBoards = Board.GetBoards();
       return View(allBoards);
     }
 

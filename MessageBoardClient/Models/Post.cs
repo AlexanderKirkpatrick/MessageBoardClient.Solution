@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.ComponentModel;
 
 namespace MessageBoardClient.Models
 {
@@ -39,7 +40,7 @@ namespace MessageBoardClient.Models
       return post;
     }
 
-    public static void Put(Post post)
+    public static void NewPost(Post post)
     {
       string requestAddress = $"Posts/{post.PostId}";
       string jsonPost = JsonConvert.SerializeObject(post);
