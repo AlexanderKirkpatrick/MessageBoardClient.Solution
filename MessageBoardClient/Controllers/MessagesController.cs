@@ -31,20 +31,28 @@ namespace MessageBoardClient.Controllers
       return View(message);
     }
 
-    public ActionResult Create()
+    [HttpPost]
+    public IActionResult Details(int id, Message message)
+    {
+      message.MessageId = id;
+      Message.Put(message);
+      return RedirectToAction("Details", id);
+    }
+
+    public IActionResult Create()
     {
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Message message)
+    public IActionResult Create(Message message)
     {
       message.Date = System.DateTime.Now;
       Message.Post(message);
       return RedirectToAction("Index");
     }
 
-    public ActionResult Edit(int id)
+    public IActionResult Edit(int id)
     {
       var message = Message.GetDetails(id);
       return View(message);
